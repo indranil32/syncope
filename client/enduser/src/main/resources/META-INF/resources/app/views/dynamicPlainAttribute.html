@@ -17,12 +17,27 @@ specific language governing permissions and limitations
 under the License.
 -->
 <div ng-switch="schema.type" class="schema-type">
-  <input ng-switch-when="String" class="form-control" type="text"
-         ng-model="user.plainAttrs[schema.key].values[index]"
-         ng-required="{{schema.mandatoryCondition}}" validate="true"
-         ng-disabled="schema.readonly || customReadonly(schema.key)"
-         ng-init="initAttribute(schema, index)"
-         name="{{schema.key}}"/>
+
+	<div ng-switch-when="String">
+		<input	ng-if="schema.key.indexOf('_Selected') === -1" 	
+				class="form-control" 
+				type="text" 
+				ng-model="user.plainAttrs[schema.key].values[index]" 
+				ng-required="{{schema.mandatoryCondition}}" validate="true"
+				ng-disabled="schema.readonly || customReadonly(schema.key)" 
+				ng-init="initAttribute(schema, index)" name="{{schema.key}}" /> 
+				
+		<select ng-if="schema.key.indexOf('_Selected') != -1" 
+				class="form-control custom-select"
+				ng-model="user.plainAttrs[schema.key].values[index]"
+				ng-required="{{schema.mandatoryCondition}}" validate="true"
+				ng-disabled="schema.readonly || customReadonly(schema.key)" 
+				ng-options="itemList.key as itemList.content for itemList in availableOptions[plainSchema.key.split('_')[0]+'s']" 
+				ng-init="initAttribute(schema, index)" 
+				name="{{schema.key}}">
+			<option value="">{{'Please Select'| translate}}</option>
+		</select>
+	</div>
 
   <div ng-switch-when="Encrypted" class="input-group input-group-sm">
     <span class="input-group-btn" ng-disabled="schema.readonly || customReadonly(schema.key)">  
