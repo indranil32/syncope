@@ -17,27 +17,49 @@ specific language governing permissions and limitations
 under the License.
 -->
 <div ng-switch="schema.type" class="schema-type">
-
-	<div ng-switch-when="String">
-		<input	ng-if="schema.key.indexOf('_Selected') === -1" 	
-				class="form-control" 
-				type="text" 
-				ng-model="user.plainAttrs[schema.key].values[index]" 
-				ng-required="{{schema.mandatoryCondition}}" validate="true"
-				ng-disabled="schema.readonly || customReadonly(schema.key)" 
-				ng-init="initAttribute(schema, index)" name="{{schema.key}}" /> 
-				
-		<select ng-if="schema.key.indexOf('_Selected') != -1" 
-				class="form-control custom-select"
-				ng-model="user.plainAttrs[schema.key].values[index]"
-				ng-required="{{schema.mandatoryCondition}}" validate="true"
-				ng-disabled="schema.readonly || customReadonly(schema.key)" 
-				ng-options="itemList.key as itemList.content for itemList in availableOptions[plainSchema.key.split('_')[0]+'s']" 
-				ng-init="initAttribute(schema, index)" 
-				name="{{schema.key}}">
-			<option value="">{{'Please Select'| translate}}</option>
+  <div ng-switch-when="String">
+  		<input ng-if="schema.key.indexOf('_Selected') == -1"  
+  			 class="form-control" type="text"
+	         ng-model="user.plainAttrs[schema.key].values[index]"
+	         ng-required="{{schema.mandatoryCondition}}" validate="true"
+	         ng-disabled="schema.readonly || customReadonly(schema.key)"
+	         ng-init="initAttribute(schema, index)"
+	         name="{{schema.key}}"/>
+	    <select ng-if="schema.key.indexOf('_Selected') != -1" 
+			class="form-control"
+			ng-model="$ctrl.user.plainAttrs[schema.key].values[index]"
+			ng-required="{{schema.mandatoryCondition}}" validate="true"
+			ng-disabled="schema.readonly || customReadonly(schema.key)" 
+			ng-init="initAttribute(schema, index)"
+			ng-options="itemList.key as itemList.content for itemList in availableOptions[schema.key.split('_')[0]+'s']" 
+			name="{{schema.key}}">
+			<!-- ng-dropdown ng-change="$ctrl.changeme()" -->
+			<option ng-option value="">Please Select...</option>
 		</select>
-	</div>
+		
+		<div class="form-control"  ng-if="user.plainAttrs[schema.key].values[index] == 'killbill-stripe' || user.plainAttrs[schema.key].values[index] == 'killbill-paypal-express'">
+          	<form action="http://35.227.67.37:4567/charge" method="post" ng-if="user.plainAttrs[schema.key].values[index] == 'killbill-stripe'" class="form-control">
+				<input type="hidden" name="externalKey" value="{{user.username}}" />
+				<br/>
+				<script src="https://checkout.stripe.com/v3/checkout.js" class="stripe-button" data-key="pk_test_CmztJP46fhZLqKzLJGzRhfwC"></script>
+			</form>
+			<form target="_blank" action="http://35.227.67.37:4568/redirect?externalKey={{user.username}}" method="post" ng-if="user.plainAttrs[schema.key].values[index] == 'killbill-paypal-express'" class="form-control">
+			<!-- <form action="https://www.sandbox.paypal.com/us/cgi-bin/webscr" method="post"> -->
+			     <input type="hidden" name="cmd" value="_s-xclick">
+			     <input type="hidden" name="hosted_button_id" value="34CXHXVU2J8BY">
+			     <br/>
+			     <input type="image" 
+			            src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_subscribeCC_LG.gif" 
+			            border="0" name="submit" 
+			            alt="PayPal — The safer, easier way to pay online." 
+			            style="border:none;padding:0;height:auto;width:auto">
+			     <img alt="" border="0" 
+			          src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" 
+			          width="1" height="1">
+			</form>
+	    </div>
+  </div>
+  
 
   <div ng-switch-when="Encrypted" class="input-group input-group-sm">
     <span class="input-group-btn" ng-disabled="schema.readonly || customReadonly(schema.key)">  

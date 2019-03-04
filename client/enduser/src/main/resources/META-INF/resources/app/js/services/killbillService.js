@@ -106,7 +106,7 @@ angular.module('SyncopeEnduserApp')
             	return $http.
 		                get('../api/dynamicTemplate').
 		                then(function (response) {
-		                  return response.data["killbill"];
+		                  return response.data["customProperties"];
 		                }, error);
             };
             

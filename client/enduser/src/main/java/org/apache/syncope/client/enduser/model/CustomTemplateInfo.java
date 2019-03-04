@@ -32,6 +32,8 @@ public class CustomTemplateInfo implements Serializable {
     private CustomTemplateWizard wizard = new CustomTemplateWizard();
 
     private Map<String, List<String>> generalAssets = new LinkedHashMap<>();
+    
+    private Map<String, Object> customProperties = new LinkedHashMap<>();
 
     public CustomTemplateInfo() {
     }
@@ -60,12 +62,21 @@ public class CustomTemplateInfo implements Serializable {
         this.generalAssets = generalAssets;
     }
 
-    public CustomTemplateInfo templates(final Map<String, CustomTemplate> templates,
-            final CustomTemplateWizard wizard, final Map<String, List<String>> generalAssets) {
+    public Map<String, Object> getCustomProperties() {
+        return customProperties;
+    }
 
+    public void setCustomProperties(final Map<String, Object> customProperties) {
+        this.customProperties = customProperties;
+    }
+
+    public CustomTemplateInfo templates(final Map<String, CustomTemplate> templates,
+            final CustomTemplateWizard wizard, final Map<String, List<String>> generalAssets, 
+            final Map<String, Object> customProperties) {
         this.templates = templates;
         this.wizard = wizard;
         this.generalAssets = generalAssets;
+        this.customProperties = customProperties;
         return this;
     }
 

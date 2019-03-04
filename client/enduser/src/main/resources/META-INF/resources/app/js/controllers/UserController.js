@@ -334,12 +334,6 @@ angular.module("self").controller("UserController", ['$scope', '$rootScope', '$l
 
       var initKillBillResources = function () {
     	  KillBillService.getKillBillDetails().then(fucntion(response){
-    		  /*{
-    		  		"headers": {"Authorization" : "Basic YmVlcDpib29w", "Accept": "application/json", "X-Killbill-ApiKey" : "newremmedia", "X-Killbill-ApiSecret" : "newremmedia"},
-    				"baseUrl" : "http://127.0.0.1:8080/1.0/kb",
-    				"packages" : "/catalog/availableBasePlans",
-    				"paymentMethods" : "/paymentMethods/pagination?offset=0&limit=100"
-    		  }*/
     		  var finalUrl = response.baseUrl+response.packages;
     		  var req = {
          			 method: 'GET',
@@ -349,7 +343,7 @@ angular.module("self").controller("UserController", ['$scope', '$rootScope', '$l
     		  var pkgList = KillBillService.getBaseAvailablePackages(req);
 	    	  for (var i = 0 , len=pkgList.length; i < len ; i++) {
 	    		for (var j = 0 , len2= pkgList[i].finalPhaseRecurringPrice.length; j < len2 ; j++) {
-	    			this.availableOptions.basePackages.push({key: pkgList[i].product, content: pkgList[i].product+ " -- " + pkgList[i].plan + " -- " + pkgList[i].finalPhaseBillingPeriod + " -- " + pkgList[i].finalPhaseRecurringPrice[j].currency + " -- " + pkgList[i].finalPhaseRecurringPrice[j].value});
+	    			$scope.availableOptions.basePackages.push({key: pkgList[i].product, content: pkgList[i].product+ " -- " + pkgList[i].plan + " -- " + pkgList[i].finalPhaseBillingPeriod + " -- " + pkgList[i].finalPhaseRecurringPrice[j].currency + " -- " + pkgList[i].finalPhaseRecurringPrice[j].value});
 	    		}
 	    	  }
 
@@ -361,9 +355,9 @@ angular.module("self").controller("UserController", ['$scope', '$rootScope', '$l
 	    	  }
 	    	  var payList = KillBillService.getPaymentMethods(req);
 	    	  for (var i = 0 , len=payList.length; i < len ; i++) {
-	    		this.availableOptions.paymentMethods.push({key: payList[i].paymentMethodId, content: payList[i].pluginName});
+	    		  $scope.availableOptions.paymentMethods.push({key: payList[i].paymentMethodId, content: payList[i].pluginName});
 	    	  }
-	    	  console.log(this.availableOptions)
+	    	  console.log($scope.availableOptions)
     	  });
       };
       
