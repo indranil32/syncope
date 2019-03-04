@@ -31,10 +31,12 @@ under the License.
   <description>Apache Syncope Client IdRepo Console</description>
   <groupId>org.apache.syncope.client.idrepo</groupId>
   <artifactId>syncope-client-idrepo-console</artifactId>
+  <version>3.0.0-newremmedia-SNAPSHOT</version>
   <packaging>jar</packaging>
   
   <properties>
     <rootpom.basedir>${basedir}/../../..</rootpom.basedir>
+    <parent.version>3.0.0-SNAPSHOT</parent.version>
   </properties>
   
   <dependencies>
@@ -89,7 +91,7 @@ under the License.
     <dependency>
       <groupId>org.apache.syncope.client.idrepo</groupId>
       <artifactId>syncope-client-idrepo-lib</artifactId>
-      <version>${project.version}</version>
+      <version>${parent.version}</version>
     </dependency>
 
     <dependency>

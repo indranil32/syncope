@@ -30,18 +30,24 @@ under the License.
   <name>Apache Syncope sample project - Console</name>
   <groupId>${groupId}</groupId>
   <artifactId>${artifactId}</artifactId>
+  <version>3.0.0-newremmedia-SNAPSHOT</version>
   <packaging>war</packaging>
+  
+  <properties>
+  	<parent.version>3.0.0-SNAPSHOT</parent.version>
+  </properties>
 
   <dependencies>
     <dependency>
       <groupId>${groupId}</groupId>
       <artifactId>syncope-common</artifactId>
-      <version>${project.version}</version>
+      <version>${parent.version}</version>
     </dependency>  
 
     <dependency>
       <groupId>org.apache.syncope.client.idm</groupId>
       <artifactId>syncope-client-idm-console</artifactId>
+      <version>3.0.0-newremmedia-SNAPSHOT</version>
     </dependency>    
   </dependencies>
 

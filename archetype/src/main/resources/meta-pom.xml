@@ -38,6 +38,8 @@ under the License.
     
     <rat.skip>true</rat.skip>
     <checkstyle.skip>true</checkstyle.skip>
+    
+    <custom.version>3.0.0-newremmedia-SNAPSHOT</custom.version>
   </properties>
 
   <name>Apache Syncope sample project</name>
@@ -68,7 +70,7 @@ under the License.
       <dependency>
         <groupId>org.apache.syncope.client.idm</groupId>
         <artifactId>syncope-client-idm-console</artifactId>
-        <version>${syncope.version}</version>
+        <version>${custom.version}</version>
       </dependency>
 
       <dependency>
